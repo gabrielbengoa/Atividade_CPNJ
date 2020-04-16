@@ -1,38 +1,79 @@
-var cpnjCliente;
-var cpnj12;
-var cpnj13;
-var contagem1 = 10;
-var contagem2 = 11;
+var cnpjOriginal = "";
+var cnpj12 = "";
+var cnpj4 = "";
+var cnpj5 = "";
+var cnpj8 = "";
+var contador5 = 5;
+var contador6 = 6;
+var contador9 = 9;
+var resultado = 0;
 var resto = 0;
-var rs1 = 0;
-var rs2 = 0;
-var cpnjfinal;
 
-cpnjCliente = prompt("Informe o seu CPNJ");
-cpnj12 = cpnjCliente.substring(0, 12);
+cnpjOriginal = prompt("Informe o seu CNPJ");
+cnpj12 = cnpjOriginal.substring(0, 12);
+console.log(cnpj12);
 
-for (var i = 0; i < cpnj12.length; i++) {
-  rs1 += cpnj12[i] * contagem1;
+cnpj4 = cnpj12.substring(0, 4);
+cnpj8 = cnpj12.substring(4, 12);
 
-  contagem1--;
+console.log("Os 4 primeiros" + cnpj4);
+console.log("Os 8 restantes" + cnpj8);
+
+// cnpj4  1  1  4  4
+// posic  0  1  2  3
+
+for (var i = 0; i <= 3; i++) {
+  resultado += cnpj4[i] * contador5;
+  contador5--;
 }
 
-resto = rs1 % 11;
-
-if (resto < 2) cpnj13 = cpnj12 + "0";
-else cpnj13 = cpnj12 + "" + (11 - resto);
-
-for (var i = 0; i < cpnj13.length; i++) {
-  rs2 += cpnj13[i] * contagem2;
-  contagem2--;
+for (var i = 0; i <= 7; i++) {
+  resultado += cnpj8[i] * contador9;
+  contador9--;
 }
 
-resto = rs2 % 11;
-if (resto < 2) cpnjfinal = cpnj13 + "0";
-else cpnjfinal = cpnj13 + "" + (11 - resto);
+console.log(resultado);
+resto = resultado % 11;
 
-if (cpnjCliente == cpnjfinal) {
-  alert("CPNJ Válido");
+if (resto < 2) {
+  cnpj12 += "0";
 } else {
-  alert("CPNJ inválido");
+  cnpj12 += "" + (11 - resto);
+}
+console.log(cnpj12);
+
+// Segundo Cálculo do CNPJ //
+
+resultado = 0;
+cnpj5 = cnpj12.substring(0, 5);
+cnpj8 = cnpj12.substring(5, 13);
+
+console.log("Os 5 primeiros" + cnpj5);
+console.log("Os 8 restantes" + cnpj8);
+
+for (var i = 0; i <= 4; i++) {
+  resultado += cnpj5[i] * contador6;
+  contador6--;
+}
+
+contador9 = 9;
+for (var i = 0; i <= 7; i++) {
+  resultado += cnpj8[i] * contador9;
+  contador9--;
+}
+
+console.log(resultado);
+resto = resultado % 11;
+
+if (resto < 2) {
+  cnpj12 += "0";
+} else {
+  cnpj12 += "" + (11 - resto);
+}
+console.log(cnpj12);
+
+if (cnpjOriginal == cnpj12) {
+  alert("CNPJ Válido");
+} else {
+  alert("CNPJ Inválido");
 }
